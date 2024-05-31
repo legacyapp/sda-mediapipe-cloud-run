@@ -3,3 +3,4 @@ gunicorn==20.1.0
 opencv-python-headless~=4.8.0.76
 numpy~=1.25.2
 mediapipe~=0.10.3
+Werkzeug==2.2.2
