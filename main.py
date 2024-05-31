@@ -62,12 +62,12 @@ def hello_world():
                 frame_num += 1
                 continue
             landmarks = results.pose_landmarks.landmark
+            data["frames"][frame_num]["timestamp"] = float(cap.get(cv2.CAP_PROP_POS_MSEC))
             for i in range(len(mp_pose.PoseLandmark)):
                 data["frames"][frame_num]["pose"][i][0] = float(landmarks[i].x)
                 data["frames"][frame_num]["pose"][i][1] = float(landmarks[i].y)
                 data["frames"][frame_num]["pose"][i][2] = float(landmarks[i].z)
                 data["frames"][frame_num]["pose"][i][3] = float(landmarks[i].visibility)
-
 
             frame_num += 1
 
