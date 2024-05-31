@@ -56,8 +56,12 @@ def hello_world():
 
             image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
             results = pose.process(image)
+            if (results.pose_landmarks is None):
+                data["frames"][frame_num]["timestamp"] = float(cap.get(cv2.CAP_PROP_POS_MSEC))
+                data["frames"][frame_num]["pose"] = None
+                frame_num += 1
+                continue
             landmarks = results.pose_landmarks.landmark
-            data["frames"][frame_num]["timestamp"] = float(cap.get(cv2.CAP_PROP_POS_MSEC))
             for i in range(len(mp_pose.PoseLandmark)):
                 data["frames"][frame_num]["pose"][i][0] = float(landmarks[i].x)
                 data["frames"][frame_num]["pose"][i][1] = float(landmarks[i].y)
